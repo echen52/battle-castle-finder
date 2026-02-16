@@ -156,8 +156,7 @@ A: IV 31 is max IVs and standard for higher rounds. Any battle past Battle 49 is
 ## Acknowledgments
 
 - Pokemon sprite images from [PokeAPI](https://pokeapi.co/)
-- Built for the Pokemon competitive community
-- Special thanks to the Battle Facility research community
+- Special thanks to the Battle Facilities Discord and Smogon
 
 ## License
 
