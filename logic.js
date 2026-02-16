@@ -47,13 +47,17 @@ class BattleCastleEngine {
         }
 
         return this.data.filter(p => {
+            // Filter out "0" placeholder abilities
+            const validAbilities = p.abilities.filter(a => a && a !== '0');
+            
             // Strict matching logic from Python script
             // (Ability1 OR Ability2) AND Nature AND Item
-            const matchAbility = (p.abilities[0] === fAbility || p.abilities[1] === fAbility);
-            const matchNature = p.nature === fNature;
-            const matchItem = p.item === fItem;
+            const matchAbility = fAbility ? validAbilities.some(a => a === fAbility) : true;
+            const matchNature = fNature ? p.nature === fNature : true;
+            const matchItem = fItem ? p.item === fItem : true;
 
-            return matchAbility && matchNature && matchItem;
+            // Return true only if we have at least one criterion and all provided criteria match
+            return (fAbility || fNature || fItem) && matchAbility && matchNature && matchItem;
         });
     }
 
