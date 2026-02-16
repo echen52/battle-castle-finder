@@ -35,7 +35,13 @@ class BattleCastleEngine {
      */
     findMatches(ability, nature, item) {
         // Normalize inputs to Title Case to match DB (e.g., "jolly" -> "Jolly")
-        const formatInput = (str) => str ? str.trim().toLowerCase().replace(/\b\w/g, c => c.toUpperCase()) : "";
+        // But don't capitalize after apostrophes (e.g., "king's rock" -> "King's Rock" not "King'S Rock")
+        const formatInput = (str) => {
+            if (!str) return "";
+            return str.trim().split(' ').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            ).join(' ');
+        };
 
         const fAbility = formatInput(ability);
         const fNature = formatInput(nature);
